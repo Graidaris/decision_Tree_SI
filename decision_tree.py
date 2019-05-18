@@ -31,7 +31,8 @@ with open("ne_labels.data", "r") as file_of_labels:
     labels = [int(label) for label in file_of_labels.readline().strip().split(" ")]
 
 
-print(features[10])
+print(labels)
+sys.exit()
 
 #for what need this lines????
 x = zip(labels, features)
@@ -53,7 +54,7 @@ for id in test_idx:
 
 clf = tree.DecisionTreeClassifier()
 clf.fit(features, labels)
-
+#what here going on? 
 
 featuresNames = ["age", "sex", "cp", "trestbps", "chol", "fbs",
                  "restecg", "exang", "thalach", "oldpeak", "slope", "ca", "thal"]
