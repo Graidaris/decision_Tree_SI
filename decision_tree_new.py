@@ -1,5 +1,7 @@
 import os
 import sklearn
+from sklearn import tree
+import graphviz
 import consts
 
 
@@ -7,6 +9,7 @@ class MyDecisionTree:
 
     def __init__(self):
         self.dataset = {'data': [], 'target': []}
+        self.clf = tree.DecisionTreeClassifier()
 
     def load_dataset(self, name):
         list_of_data = []
@@ -28,10 +31,17 @@ class MyDecisionTree:
         ds.sort(key=self.take_target)
 
     def training(self):
-        pass
+        self.clf = self.clf.fit(self.dataset['data'], self.dataset['target'])
+        
+    def save_tree(self, name_out_file="out_tree"):
+        tree.plot_tree(self.clf)
+        dot_data = tree.export_graphviz(self.clf, out_file=None)
+        graph = graphviz.Source(dot_data) 
+        graph.render("out_tree")
 
 
 if __name__ == "__main__":
     dc = MyDecisionTree()
     dc.load_dataset(os.path.join('datasets_new', 'new_dataset.data'))
-    print(dc.dataset)
+    dc.training()
+    dc.save_tree()
