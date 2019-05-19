@@ -18,25 +18,25 @@ class MyDecisionTree:
                 l = [float(x) for x in line.strip().split(',')]
                 list_of_data.append(l)
 
-        self.sort_by_target(list_of_data)
+        self.__sort_by_target(list_of_data)
 
         for one_set in list_of_data:
             self.dataset['data'].append(one_set[:-1])
             self.dataset['target'].append(int(one_set[-1]))
 
-    def take_target(self, element):
+    def __take_target(self, element):
         return element[consts.NUM]
 
-    def sort_by_target(self, ds):
-        ds.sort(key=self.take_target)
+    def __sort_by_target(self, ds):
+        ds.sort(key=self.__take_target)
 
     def training(self):
         self.clf = self.clf.fit(self.dataset['data'], self.dataset['target'])
-        
+
     def save_tree(self, name_out_file="out_tree"):
         tree.plot_tree(self.clf)
         dot_data = tree.export_graphviz(self.clf, out_file=None)
-        graph = graphviz.Source(dot_data) 
+        graph = graphviz.Source(dot_data)
         graph.render("out_tree")
 
 
