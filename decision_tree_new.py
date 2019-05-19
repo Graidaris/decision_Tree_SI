@@ -7,9 +7,15 @@ import consts
 
 class MyDecisionTree:
 
+    feature_names = ['age', 'sex', 'cp', 'trestbps', 'chol', 'fbs',
+                     'restecg', 'thalach', 'exang', 'oldpeak', 'slope', 'ca', 'thal']
+    target_names = ['No presence', 'Presence 1',
+                    'Presence 2', 'Presence 3', 'Presence 4']
+
     def __init__(self):
         self.dataset = {'data': [], 'target': []}
-        self.clf = tree.DecisionTreeClassifier()
+        self.tree_classifier = tree.DecisionTreeClassifier()
+        self.tree_regressor = tree.DecisionTreeRegressor()
 
     def load_dataset(self, name):
         list_of_data = []
@@ -30,18 +36,35 @@ class MyDecisionTree:
     def __sort_by_target(self, ds):
         ds.sort(key=self.__take_target)
 
-    def training(self):
-        self.clf = self.clf.fit(self.dataset['data'], self.dataset['target'])
+    def training_to_classifier(self):
+        self.tree_classifier = self.tree_classifier.fit(
+            self.dataset['data'], self.dataset['target'])
 
-    def save_tree(self, name_out_file="out_tree"):
-        tree.plot_tree(self.clf)
-        dot_data = tree.export_graphviz(self.clf, out_file=None)
+    def training_to_regression(self):
+        targets_for_regression = [float(x) for x in self.dataset['target']]
+        self.tree_regressor = self.tree_regressor.fit(
+            self.dataset['data'], targets_for_regression)
+        
+    def regression_predict(self, data):
+        return self.tree_regressor.predict(data)
+    
+    def classification_predict(self, data):
+        return self.tree_classifier.predict_proba(data, [1.0]*13)
+
+    def save_tree_classifier(self, name_out_file="out_tree"):
+        tree.plot_tree(self.tree_classifier)
+        dot_data = tree.export_graphviz(self.tree_classifier, out_file=None,
+                                        feature_names=self.feature_names,
+                                        class_names=self.target_names,
+                                        filled=True, rounded=True,
+                                        special_characters=True)
         graph = graphviz.Source(dot_data)
-        graph.render("out_tree")
+        graph.render(name_out_file)
 
 
 if __name__ == "__main__":
     dc = MyDecisionTree()
     dc.load_dataset(os.path.join('datasets_new', 'new_dataset.data'))
-    dc.training()
-    dc.save_tree()
+    dc.training_to_classifier()
+    dc.training_to_regression()  
+    print(dc.classification_predict([23.0, 1.0, 4.0, 160.0, 165.0, 0.0, 0.0, 150.0, 0.0, 2.3, 2.0, 0.0, 3.0]))
