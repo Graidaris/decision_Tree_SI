@@ -44,12 +44,6 @@ class MyDecisionTree:
         targets_for_regression = [float(x) for x in self.dataset['target']]
         self.tree_regressor = self.tree_regressor.fit(
             self.dataset['data'], targets_for_regression)
-        
-    def regression_predict(self, data):
-        return self.tree_regressor.predict(data)
-    
-    def classification_predict(self, data):
-        return self.tree_classifier.predict_proba(data, [1.0]*13)
 
     def save_tree_classifier(self, name_out_file="out_tree"):
         tree.plot_tree(self.tree_classifier)
@@ -66,5 +60,6 @@ if __name__ == "__main__":
     dc = MyDecisionTree()
     dc.load_dataset(os.path.join('datasets_new', 'new_dataset.data'))
     dc.training_to_classifier()
-    dc.training_to_regression()  
-    print(dc.classification_predict([23.0, 1.0, 4.0, 160.0, 165.0, 0.0, 0.0, 150.0, 0.0, 2.3, 2.0, 0.0, 3.0]))
+    dc.training_to_regression()
+    print(dc.classification_predict(
+        [23.0, 1.0, 4.0, 160.0, 165.0, 0.0, 0.0, 150.0, 0.0, 2.3, 2.0, 0.0, 3.0]))
