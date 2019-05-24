@@ -25,7 +25,10 @@ class MyDecisionTree:
                     l = [float(x) for x in line.strip().split(',')]
                     list_of_data.append(l)
         except FileNotFoundError:
-            print("ERROR: File not found")
+            print(f"ERROR: File {name} not found")
+            return None
+        except Exception as e:
+            print(f"ERROR with open file {name} - {e}")
             return None
 
         self.__sort_by_target(list_of_data)
@@ -81,7 +84,7 @@ class MyDecisionTree:
 
 if __name__ == "__main__":
     """ Some commands to test """
-    
+
     dc = MyDecisionTree()
     dc.load_dataset(os.path.join('datasets_new', 'new_dataset.data'))
     dc.training_classifier()
