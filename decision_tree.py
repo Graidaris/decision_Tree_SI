@@ -83,6 +83,54 @@ class MyDecisionTree:
         graph = graphviz.Source(dot_data)
         graph.render(name_out_file)
 
+        #The code below to review ... and refactoring
+
+        def print_tree(t, root=0, depth=1):
+            if depth == 1:
+                print('def predict(X_i):')
+            indent = '    '*depth
+            print(indent + '# node %s: impurity = %.2f' %
+                  (str(root), t.impurity[root]))
+            left_child = t.children_left[root]
+            right_child = t.children_right[root]
+
+            if left_child == sklearn.tree._tree.TREE_LEAF:
+                id = 0
+                for num in t.value[root][0]:
+                    if num > 0.:
+                        break
+                    id = id+1
+                print(indent + 'return %s # (node %d)' %
+                      (target_names[id], root))  # class_name[id]
+            else:
+                print(indent + 'if X_i' + str(t.feature[root]) +
+                      ' < %.2f: # (node %d)' % (t.threshold[root], root))
+                print_tree(t, root=left_child, depth=depth+1)
+
+                print(indent + 'else:')
+                print_tree(t, root=right_child, depth=depth+1)
+
+        def tree_decision(t, values_t, root=0, depth=1):
+
+            left_child = t.children_left[root]
+            right_child = t.children_right[root]
+
+            if left_child == sklearn.tree._tree.TREE_LEAF:
+                id = -1
+                for num in t.value[root][0]:
+                    id = id+1
+                    if num > 0:
+                        break
+
+                return target_names[id]  # class_name[id]
+            else:
+
+                if values_t[t.feature[root]] < t.threshold[root]:
+                    return tree_decision(t, values_t, root=left_child, depth=depth+1)
+
+                else:
+                    return tree_decision(t, values_t, root=right_child, depth=depth+1)
+
 
 if __name__ == "__main__":
     """ Some commands to test """
