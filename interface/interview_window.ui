@@ -36,8 +36,20 @@
       </property>
       <item>
        <widget class="QSplitter" name="splitter">
+        <property name="enabled">
+         <bool>true</bool>
+        </property>
         <property name="orientation">
          <enum>Qt::Horizontal</enum>
+        </property>
+        <property name="opaqueResize">
+         <bool>true</bool>
+        </property>
+        <property name="handleWidth">
+         <number>0</number>
+        </property>
+        <property name="childrenCollapsible">
+         <bool>true</bool>
         </property>
         <widget class="QPushButton" name="buttonTrue">
          <property name="text">
@@ -57,7 +69,7 @@
          <enum>QLayout::SetFixedSize</enum>
         </property>
         <item>
-         <widget class="QPushButton" name="pushButton_2">
+         <widget class="QPushButton" name="pushButton_result">
           <property name="text">
            <string>Menu</string>
           </property>
@@ -77,7 +89,7 @@
          </spacer>
         </item>
         <item>
-         <widget class="QPushButton" name="pushButton">
+         <widget class="QPushButton" name="pushButton_menu">
           <property name="text">
            <string>Show Result</string>
           </property>
@@ -89,8 +101,13 @@
     </item>
    </layout>
   </widget>
-  <widget class="QStatusBar" name="statusbar"/>
  </widget>
+ <tabstops>
+  <tabstop>buttonTrue</tabstop>
+  <tabstop>buttonFalse</tabstop>
+  <tabstop>pushButton_result</tabstop>
+  <tabstop>pushButton_menu</tabstop>
+ </tabstops>
  <resources/>
  <connections/>
 </ui>
