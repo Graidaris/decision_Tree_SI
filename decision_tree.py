@@ -7,7 +7,7 @@ import graphviz
 import consts
 
 
-class MyDecisionTree:
+class DecisionTree:
 
     feature_names = ['age', 'sex', 'cp', 'trestbps', 'chol', 'fbs',
                      'restecg', 'thalach', 'exang', 'oldpeak', 'slope', 'ca', 'thal']
@@ -135,7 +135,7 @@ class MyDecisionTree:
 if __name__ == "__main__":
     """ Some commands to test """
 
-    dc = MyDecisionTree()
+    dc = DecisionTree()
     dc.load_dataset(os.path.join('datasets_new', 'new_dataset.data'))
     dc.training_classifier()
     dc.training_regression()
