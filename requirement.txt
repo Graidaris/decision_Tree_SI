@@ -4,3 +4,4 @@ sklearn
 PyQt5
 matplotlib
 pandas
+PySide2
