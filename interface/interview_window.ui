@@ -69,7 +69,7 @@
          <enum>QLayout::SetFixedSize</enum>
         </property>
         <item>
-         <widget class="QPushButton" name="pushButton_result">
+         <widget class="QPushButton" name="pushButton_menu">
           <property name="text">
            <string>Menu</string>
           </property>
@@ -89,7 +89,7 @@
          </spacer>
         </item>
         <item>
-         <widget class="QPushButton" name="pushButton_menu">
+         <widget class="QPushButton" name="pushButton_result">
           <property name="text">
            <string>Show Result</string>
           </property>
@@ -105,8 +105,8 @@
  <tabstops>
   <tabstop>buttonTrue</tabstop>
   <tabstop>buttonFalse</tabstop>
-  <tabstop>pushButton_result</tabstop>
   <tabstop>pushButton_menu</tabstop>
+  <tabstop>pushButton_result</tabstop>
  </tabstops>
  <resources/>
  <connections/>
