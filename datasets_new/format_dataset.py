@@ -1,6 +1,9 @@
-
+#/usr/bin/python3.7
 def tofloat(s):
-    """In our dataset we can meet a variable like '-.9', this function converts this variable to a float """
+    """
+    In our dataset we can meet a variable like '-.9', 
+    this function converts this variable to a float 
+    """
 
     integer, mantissa = s.split('.')
     if integer is ('-' or '+' or ''):

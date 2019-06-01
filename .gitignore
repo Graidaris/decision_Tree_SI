@@ -9,3 +9,9 @@ e
 e.pdf
 out_tree
 venv
+__pycache__/decision_tree.cpython-37.pyc
+.idea/decision_Tree_SI-scikit-learn.iml
+.idea/misc.xml
+.idea/modules.xml
+.idea/vcs.xml
+.idea/workspace.xml

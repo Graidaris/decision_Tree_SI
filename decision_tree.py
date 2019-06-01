@@ -1,4 +1,4 @@
-#/usr/bin/python3.7
+# /usr/bin/python3.7
 
 import os
 import sklearn
@@ -8,7 +8,6 @@ import consts
 
 
 class DecisionTree:
-
     feature_names = ['age', 'sex', 'cp', 'trestbps', 'chol', 'fbs',
                      'restecg', 'thalach', 'exang', 'oldpeak', 'slope', 'ca', 'thal']
     target_names = ['No presence', 'Presence 1',
@@ -20,6 +19,7 @@ class DecisionTree:
         self.tree_regressor = tree.DecisionTreeRegressor()
 
     def load_dataset(self, name):
+        print(f"Load database: {name}")
         list_of_data = []
         try:
             with open(name, 'r') as dataset:
@@ -46,22 +46,24 @@ class DecisionTree:
         ds.sort(key=self.__take_target)
 
     def training_classifier(self):
+        print("Training classifier")
         self.tree_classifier = self.tree_classifier.fit(
             self.dataset['data'], self.dataset['target'])
 
     def training_regression(self):
+        print("Training regression")
         targets_for_regression = [float(x) for x in self.dataset['target']]
         self.tree_regressor = self.tree_regressor.fit(
             self.dataset['data'], targets_for_regression)
 
     def predict_by_classification(self, array):
         """ Predict the class, using sklearn library classification.predict """
-
+        print("Predict by classification")
         return self.tree_classifier.predict(array)
 
     def predict_by_regression(self, array):
         """ Predict the class by regression, using sklearn library regression.predict """
-
+        print("Predict by regression")
         return self.tree_regressor.predict(array)
 
     def save_tree(self, name_out_file="tree_of_classification"):
@@ -83,53 +85,6 @@ class DecisionTree:
         graph = graphviz.Source(dot_data)
         graph.render(name_out_file)
 
-        #The code below to review ... and refactoring
-
-        def print_tree(t, root=0, depth=1):
-            if depth == 1:
-                print('def predict(X_i):')
-            indent = '    '*depth
-            print(indent + '# node %s: impurity = %.2f' %
-                  (str(root), t.impurity[root]))
-            left_child = t.children_left[root]
-            right_child = t.children_right[root]
-
-            if left_child == sklearn.tree._tree.TREE_LEAF:
-                id = 0
-                for num in t.value[root][0]:
-                    if num > 0.:
-                        break
-                    id = id+1
-                print(indent + 'return %s # (node %d)' %
-                      (target_names[id], root))  # class_name[id]
-            else:
-                print(indent + 'if X_i' + str(t.feature[root]) +
-                      ' < %.2f: # (node %d)' % (t.threshold[root], root))
-                print_tree(t, root=left_child, depth=depth+1)
-
-                print(indent + 'else:')
-                print_tree(t, root=right_child, depth=depth+1)
-
-        def tree_decision(t, values_t, root=0, depth=1):
-
-            left_child = t.children_left[root]
-            right_child = t.children_right[root]
-
-            if left_child == sklearn.tree._tree.TREE_LEAF:
-                id = -1
-                for num in t.value[root][0]:
-                    id = id+1
-                    if num > 0:
-                        break
-
-                return target_names[id]  # class_name[id]
-            else:
-
-                if values_t[t.feature[root]] < t.threshold[root]:
-                    return tree_decision(t, values_t, root=left_child, depth=depth+1)
-
-                else:
-                    return tree_decision(t, values_t, root=right_child, depth=depth+1)
 
 
 if __name__ == "__main__":
@@ -138,8 +93,3 @@ if __name__ == "__main__":
     dc = DecisionTree()
     dc.load_dataset(os.path.join('datasets_new', 'new_dataset.data'))
     dc.training_classifier()
-    dc.training_regression()
-    print(dc.predict_by_classification(
-        [[54.0, 1.0, 4.0, 130.0, 239.0, 0.0, 0.0, 155.0, 0.0, 1.2, 1.0, 0.0, 3.0]]))
-    print(dc.predict_by_regression(
-        [[54.0, 1.0, 4.0, 150.0, 239.0, 0.0, 0.0, 165.0, 0.0, 1.2, 1.0, 0.0, 3.0]]))
