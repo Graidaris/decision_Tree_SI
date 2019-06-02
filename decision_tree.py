@@ -18,6 +18,7 @@ class DecisionTree:
         self.tree_classifier = tree.DecisionTreeClassifier()
         self.tree_regressor = tree.DecisionTreeRegressor()
 
+
     def load_dataset(self, name):
         print(f"Load database: {name}")
         list_of_data = []
@@ -49,6 +50,11 @@ class DecisionTree:
         print("Training classifier")
         self.tree_classifier = self.tree_classifier.fit(
             self.dataset['data'], self.dataset['target'])
+
+    def print_tree(self):
+        text_tree = sklearn.tree.export.export_text(decision_tree=self.tree_classifier,
+                                                    feature_names=self.feature_names)
+        print(text_tree)
 
     def training_regression(self):
         print("Training regression")
@@ -86,10 +92,10 @@ class DecisionTree:
         graph.render(name_out_file)
 
 
-
 if __name__ == "__main__":
     """ Some commands to test """
 
     dc = DecisionTree()
     dc.load_dataset(os.path.join('datasets_new', 'new_dataset.data'))
     dc.training_classifier()
+    dc.print_tree()
