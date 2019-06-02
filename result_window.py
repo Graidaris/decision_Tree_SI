@@ -3,7 +3,7 @@
 # Form implementation generated from reading ui file 'result_window.ui',
 # licensing of 'result_window.ui' applies.
 #
-# Created: Wed May 29 09:23:42 2019
+# Created: Sun Jun  2 18:52:27 2019
 #      by: pyside2-uic  running on PySide2 5.12.3
 #
 # WARNING! All changes made in this file will be lost!
@@ -54,9 +54,12 @@ class Ui_ResultMenu(object):
         self.horizontalLayout_2.setObjectName("horizontalLayout_2")
         spacerItem3 = QtWidgets.QSpacerItem(198, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
         self.horizontalLayout_2.addItem(spacerItem3)
-        self.textBrowser = QtWidgets.QTextBrowser(self.centralwidget)
-        self.textBrowser.setObjectName("textBrowser")
-        self.horizontalLayout_2.addWidget(self.textBrowser)
+        self.result_label = QtWidgets.QLabel(self.centralwidget)
+        font = QtGui.QFont()
+        font.setPointSize(145)
+        self.result_label.setFont(font)
+        self.result_label.setObjectName("result_label")
+        self.horizontalLayout_2.addWidget(self.result_label)
         spacerItem4 = QtWidgets.QSpacerItem(218, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
         self.horizontalLayout_2.addItem(spacerItem4)
         self.verticalLayout_2.addLayout(self.horizontalLayout_2)
@@ -77,19 +80,13 @@ class Ui_ResultMenu(object):
 
         self.retranslateUi(ResultMenu)
         QtCore.QMetaObject.connectSlotsByName(ResultMenu)
-        ResultMenu.setTabOrder(self.pushButton_menu, self.textBrowser)
-        ResultMenu.setTabOrder(self.textBrowser, self.pushButton_exit)
+        ResultMenu.setTabOrder(self.pushButton_menu, self.pushButton_exit)
 
     def retranslateUi(self, ResultMenu):
         ResultMenu.setWindowTitle(QtWidgets.QApplication.translate("ResultMenu", "Result", None, -1))
         self.label.setText(QtWidgets.QApplication.translate("ResultMenu", "0 - no deviation detected", None, -1))
         self.label_2.setText(QtWidgets.QApplication.translate("ResultMenu", "1 - 4 is a deviation level", None, -1))
-        self.textBrowser.setHtml(QtWidgets.QApplication.translate("ResultMenu", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
-"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
-"p, li { white-space: pre-wrap; }\n"
-"</style></head><body style=\" font-family:\'Noto Sans\'; font-size:10pt; font-weight:400; font-style:normal;\">\n"
-"<p align=\"center\" style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><br /></p>\n"
-"<p align=\"center\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:72pt; font-weight:600;\">1</span></p></body></html>", None, -1))
+        self.result_label.setText(QtWidgets.QApplication.translate("ResultMenu", "1", None, -1))
         self.pushButton_menu.setText(QtWidgets.QApplication.translate("ResultMenu", "Menu", None, -1))
         self.pushButton_exit.setText(QtWidgets.QApplication.translate("ResultMenu", "Exit", None, -1))
 
