@@ -1,0 +1,17 @@
+test.py
+__pycache__/consts.cpython-37.pyc
+new_dataset.data
+datasets_new/new_dataset.data
+datasets_new/new_dataset_copy.data
+datasets_new/__pycache__/format_dataset.cpython-37.pyc
+out_tree.pdf
+e
+e.pdf
+out_tree
+venv
+__pycache__/decision_tree.cpython-37.pyc
+.idea/decision_Tree_SI-scikit-learn.iml
+.idea/misc.xml
+.idea/modules.xml
+.idea/vcs.xml
+.idea/workspace.xml
