@@ -1,3 +1,5 @@
+#/usr/bin/python3
+
 AGE = 0
 SEX = 1
 CP = 2
