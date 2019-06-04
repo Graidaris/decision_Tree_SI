@@ -1,7 +1,7 @@
-numpy
-graphviz
-sklearn
-PyQt5
-matplotlib
-pandas
-PySide2
+graphviz==0.10.1
+matplotlib==3.0.3
+numpy==1.16.3
+pandas==0.24.2
+PyQt5==5.12.2
+PySide2==5.12.3
+sklearn==0.0
