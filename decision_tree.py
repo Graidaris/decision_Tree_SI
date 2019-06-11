@@ -96,6 +96,6 @@ if __name__ == "__main__":
     """ Some commands to test """
 
     dc = DecisionTree()
-    dc.load_dataset(os.path.join('datasets_new', 'new_dataset.data'))
+    dc.load_dataset(os.path.join('dataset', 'joint_dataset.data'))
     dc.training_classifier()
     dc.print_tree()
