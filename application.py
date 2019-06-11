@@ -4,9 +4,9 @@
 import os
 import sys
 from PySide2.QtWidgets import QApplication, QMainWindow
-from main_window import Ui_MainWindow
-from interviewData_window import Ui_Interview_Data
-from result_window import Ui_ResultMenu
+from interface.main_window import Ui_MainWindow
+from interface.interviewData_window import Ui_Interview_Data
+from interface.result_window import Ui_ResultMenu
 
 from decision_tree import DecisionTree
 

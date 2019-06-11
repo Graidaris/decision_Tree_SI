@@ -1,1 +1,5 @@
-__pycash__
+__pycach__/
+.vscode/
+venv/
+interface/__pycach__/
+*.pyc
