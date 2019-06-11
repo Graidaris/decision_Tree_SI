@@ -21,7 +21,7 @@ class MainWindow(QMainWindow):
         self.ui = None
         self.go_to_main_window()
         self.d_tree = DecisionTree()
-        path_to_dataset = os.path.join('datasets_new', 'new_dataset.data')
+        path_to_dataset = os.path.join('dataset', 'joint_dataset.data')
         self.d_tree.load_dataset(path_to_dataset)
 
     def go_to_main_window(self):
