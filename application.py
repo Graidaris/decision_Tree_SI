@@ -1,4 +1,5 @@
-#!/usr/bin/python3
+#!./venv/bin/python
+# -*- coding: UTF-8 -*-
 
 import os
 import sys
