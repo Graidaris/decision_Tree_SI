@@ -1,7 +1,7 @@
 # heart_disease_detector
 The project aims to detect the presence of heart disease in patients based on medical data using the decision tree algorithm (scikit-learn).
 
-All datasets I downloaded is from `http://archive.ics.uci.edu/ml/datasets/heart+Disease`
+All the datasets I downloaded are taken from: [http://archive.ics.uci.edu](http://archive.ics.uci.edu/ml/datasets/heart+Disease)
 
 Used datasets:
 - processed.hungarian.data
