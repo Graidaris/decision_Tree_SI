@@ -10,7 +10,12 @@
 
 from PySide2 import QtCore, QtGui, QtWidgets
 
-class Ui_InterviewWindow(object):
+# Added from me: 
+import json
+#
+
+class Ui_InterviewWindow(object):    
+
     def setupUi(self, InterviewWindow):
         InterviewWindow.setObjectName("InterviewWindow")
         InterviewWindow.resize(665, 413)
@@ -80,19 +85,76 @@ class Ui_InterviewWindow(object):
         self.pushButton_previous.setText(QtWidgets.QApplication.translate("InterviewWindow", "Previous", None, -1))
         self.pushButton_next.setText(QtWidgets.QApplication.translate("InterviewWindow", "Next", None, -1))
 
+#Added from me
 
-    def add_object(self):
-        self.buttons=[]
-        for button in range(20):
-            self.buttons.append(QtWidgets.QPushButton(self.options_widget_answer))
-            self.buttons[-1].setText(f"hello {button}")
-            self.buttons[-1].setObjectName(f"hello {button}")        
+    # def add_object(self):
+    #     self.buttons=[]
+    #     for button in range(20):
+    #         self.buttons.append(QtWidgets.QPushButton(self.options_widget_answer))
+    #         self.buttons[-1].setText(f"hello {button}")
+    #         self.buttons[-1].setObjectName(f"hello {button}")        
         
-        self.verticalLayout_3 = QtWidgets.QVBoxLayout(self.options_widget_answer)
-        for button in self.buttons:
-            self.verticalLayout_3.addWidget(button)
+    #     self.verticalLayout_3 = QtWidgets.QVBoxLayout(self.options_widget_answer)
+    #     for button in self.buttons:
+    #         self.verticalLayout_3.addWidget(button)
 
-    def delete_objects(self):
-        for button in self.buttons:
-            self.verticalLayout_3.removeWidget(button)
-            button.deleteLater()
+    # def delete_objects(self):
+    #     for button in self.buttons:
+    #         self.verticalLayout_3.removeWidget(button)
+    #         button.deleteLater()
+
+    def load_questions_json(self, path):
+        with open(path, "r") as questions_json:
+            self.questions = json.load(questions_json)
+
+    def next_question(self):
+
+
+    def add_question_attributes(self):
+        self.added_elements = []
+        self.verticalLayout_question_attr = QtWidgets.QVBoxLayout(self.options_widget_answer)
+        for name in self.questions:
+            self.label.setText(self.questions[name]["question"])
+            for field_name in self.questions[name]["field_type"]:
+                if field_name == "int":
+                    self.add_int_field(self.questions[name]["field_type"][field_name])
+                elif field_name == "radio":
+                    self.add_radio_field(self.questions[name]["field_type"][field_name])
+                elif field_name == "float":
+                    self.add_float_field(self.questions[name]["field_type"][field_name])
+
+            for widget in self.added_elements:
+                self.verticalLayout_question_attr.addWidget(widget['widget'])
+
+            self.reset_question()
+
+
+    def add_radio_field(self, attr):        
+        for radio in attr:
+            radio_button = {
+                'widget': QtWidgets.QRadioButton(self.options_widget_answer),
+                'value': radio['value']
+            }            
+            radio_button['widget'].setText(radio['text'])
+            self.added_elements.append(radio_button)
+            print('added radio')
+        
+    
+    def add_int_field(self, attr):
+        spin_box = {
+            'widget': QtWidgets.QSpinBox(self.options_widget_answer)
+        }
+        self.added_elements.append(spin_box)
+        print('added int')
+
+    def add_float_field(self, attr):
+        double_spin_box = {
+            'widget': QtWidgets.QDoubleSpinBox(self.options_widget_answer)
+        }
+        self.added_elements.append(double_spin_box)
+        print('added float')
+
+    def reset_question(self):
+        for widget in self.added_elements:
+            self.verticalLayout_question_attr.removeWidget(widget['widget'])
+            widget['widget'].deleteLater()
