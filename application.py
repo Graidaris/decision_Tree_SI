@@ -67,12 +67,18 @@ class MainWindow(QMainWindow):
                 self.interview_data.append(self.ui.doubleSpinBox.value())
 
             self.ui.doubleSpinBox.setValue(0)
-            self.ui.question_label.setText(self.d_tree.feature_names[self.nr_question - 1])
-            self.ui.labelNrQuestion.setText(str(self.nr_question) + " of " + str(len(self.d_tree.feature_names)))
+            self.ui.question_label.setText(
+                self.d_tree.feature_names[self.nr_question - 1])
+            self.ui.labelNrQuestion.setText(
+                str(self.nr_question) +
+                " of " +
+                str(len(self.d_tree.feature_names))
+                )
 
     def go_to_result(self):
         if self.classifier:
-            result = self.d_tree.predict_by_classification([self.interview_data])
+            result = self.d_tree.predict_by_classification(
+                [self.interview_data])
         elif self.regression:
             result = self.d_tree.predict_by_regression([self.interview_data])
 

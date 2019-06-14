@@ -108,7 +108,7 @@ class Ui_InterviewWindow(object):
             self.questions = json.load(questions_json)
 
     def next_question(self):
-
+        pass
 
     def add_question_attributes(self):
         self.added_elements = []
