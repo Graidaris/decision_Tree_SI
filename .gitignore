@@ -1,6 +1,7 @@
 __pycach__/
 .vscode/
 venv/
+.venv_windows/
 *.pyc
 test.py
 test1.py
