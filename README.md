@@ -15,3 +15,8 @@ For install all important modules to run the project:
 ```
  pip install -r requirement.txt
 ```
+
+To start programm:
+```
+ python application.py
+```
