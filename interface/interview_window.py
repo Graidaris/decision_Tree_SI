@@ -156,6 +156,7 @@ class Ui_InterviewWindow(object):
         for widget in self.added_elements[self.names_questions[self.nr_question]]:
             widget['widget'].show()
 
+
     def add_question_attributes(self):
         for name_question in self.questions:
             self.names_questions.append(name_question)
