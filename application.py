@@ -1,11 +1,11 @@
 #!./venv/bin/python
-# -*- coding: UTF-8 -*-
+# -*- coding: utf-8 -*-
 
 import os
 import sys
 from PySide2.QtWidgets import QApplication, QMainWindow
 from interface.main_window import Ui_MainWindow
-from interface.interviewData_window import Ui_Interview_Data
+from interface.interview_window import Ui_InterviewWindow
 from interface.result_window import Ui_ResultMenu
 
 from decision_tree import DecisionTree
@@ -21,7 +21,8 @@ class MainWindow(QMainWindow):
         self.ui = None
         self.go_to_main_window()
         self.d_tree = DecisionTree()
-        path_to_dataset = os.path.join('datasets_new', 'new_dataset.data')
+        path_to_dataset = os.path.join('dataset', 'joint_dataset.data')
+        self.path_to_questions_json = os.path.join("questions", "questions.json")
         self.d_tree.load_dataset(path_to_dataset)
 
     def go_to_main_window(self):
@@ -44,46 +45,38 @@ class MainWindow(QMainWindow):
             self.regression = True
             self.d_tree.training_regression()
 
-        self.go_to_interview_data()
+        self.go_to_interview()
 
-    def go_to_interview_data(self):
-        self.ui = Ui_Interview_Data()
+    def go_to_interview(self):
+        self.ui = Ui_InterviewWindow()        
         self.ui.setupUi(self)
-        self.ui.pushButton_menu.clicked.connect(self.go_to_main_window)
+        self.ui.load_questions_json(self.path_to_questions_json)
         self.ui.pushButton_next.clicked.connect(self.next_question)
-        self.next_question()
+        self.ui.pushButton_finish.clicked.connect(self.go_to_result)
+        self.ui.pushButton_previous.clicked.connect(self.previous_question)
 
     def next_question(self):
-        self.nr_question += 1
+        self.ui.next_question()
 
-        if self.nr_question > len(self.d_tree.feature_names):
-            print(self.nr_question, self.interview_data)
-            self.go_to_result()
-        else:
-            if self.nr_question == len(self.d_tree.feature_names):
-                self.ui.pushButton_next.setText("Finish")
-
-            if self.nr_question > 0:
-                self.interview_data.append(self.ui.doubleSpinBox.value())
-
-            self.ui.doubleSpinBox.setValue(0)
-            self.ui.question_label.setText(self.d_tree.feature_names[self.nr_question - 1])
-            self.ui.labelNrQuestion.setText(str(self.nr_question) + " of " + str(len(self.d_tree.feature_names)))
-
+    def previous_question(self):
+        self.ui.previous_question()
+        
     def go_to_result(self):
+        data_to_analysis = self.ui.finish_interview()
         if self.classifier:
-            result = self.d_tree.predict_by_classification([self.interview_data])
+            result = self.d_tree.predict_by_classification([data_to_analysis])
         elif self.regression:
-            result = self.d_tree.predict_by_regression([self.interview_data])
-
+            result = self.d_tree.predict_by_regression([data_to_analysis])
+            
         self.ui = Ui_ResultMenu()
         self.ui.setupUi(self)
+        self.ui.result_text(result[0])
+        
         self.ui.pushButton_menu.clicked.connect(self.go_to_main_window)
-        self.ui.pushButton_exit.clicked.connect(self.close)
-
-        self.ui.result_label.setText(str(result))
-
-
+        self.ui.pushButton_exit.clicked.connect(self.close)      
+        
+        
+        
 if __name__ == "__main__":
     app = QApplication(sys.argv)
 
