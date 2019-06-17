@@ -3,7 +3,6 @@
 
 import os
 import sys
-import time
 from PySide2.QtWidgets import QApplication, QMainWindow
 from interface.main_window import Ui_MainWindow
 from interface.interview_window import Ui_InterviewWindow
@@ -23,6 +22,7 @@ class MainWindow(QMainWindow):
         self.go_to_main_window()
         self.d_tree = DecisionTree()
         path_to_dataset = os.path.join('dataset', 'joint_dataset.data')
+        self.path_to_questions_json = os.path.join("questions", "questions.json")
         self.d_tree.load_dataset(path_to_dataset)
 
     def go_to_main_window(self):
@@ -50,8 +50,7 @@ class MainWindow(QMainWindow):
     def go_to_interview(self):
         self.ui = Ui_InterviewWindow()        
         self.ui.setupUi(self)
-        self.ui.load_questions_json(os.path.join("questions",
-                                                 "questions.json"))
+        self.ui.load_questions_json(self.path_to_questions_json)
         self.ui.pushButton_next.clicked.connect(self.next_question)
         self.ui.pushButton_finish.clicked.connect(self.go_to_result)
         self.ui.pushButton_previous.clicked.connect(self.previous_question)
@@ -71,13 +70,13 @@ class MainWindow(QMainWindow):
             
         self.ui = Ui_ResultMenu()
         self.ui.setupUi(self)
+        self.ui.result_text(result[0])
+        
         self.ui.pushButton_menu.clicked.connect(self.go_to_main_window)
-        self.ui.pushButton_exit.clicked.connect(self.close)
-
-        self.ui.result_label.setText(str(result))
-            
-
-
+        self.ui.pushButton_exit.clicked.connect(self.close)      
+        
+        
+        
 if __name__ == "__main__":
     app = QApplication(sys.argv)
 

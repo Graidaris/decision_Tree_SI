@@ -56,7 +56,9 @@ class Ui_ResultMenu(object):
         self.horizontalLayout_2.addItem(spacerItem3)
         self.result_label = QtWidgets.QLabel(self.centralwidget)
         font = QtGui.QFont()
-        font.setPointSize(145)
+        font.setPointSize(25)
+        font.setBold(True)
+        
         self.result_label.setFont(font)
         self.result_label.setObjectName("result_label")
         self.horizontalLayout_2.addWidget(self.result_label)
@@ -89,4 +91,19 @@ class Ui_ResultMenu(object):
         self.result_label.setText(QtWidgets.QApplication.translate("ResultMenu", "1", None, -1))
         self.pushButton_menu.setText(QtWidgets.QApplication.translate("ResultMenu", "Menu", None, -1))
         self.pushButton_exit.setText(QtWidgets.QApplication.translate("ResultMenu", "Exit", None, -1))
+        
+#added from me:
+
+    def result_text(self, result):        
+        if result == 0:
+            result_text = "<font color='green'>Heart disease not detected</font>"
+        elif result == 1:
+            result_text = "<font color='red'>Heart disease detected</font>"
+        elif result == 2:  
+            result_text = "<font color='red'>Heart disease detected</font>"
+        elif result == 3:
+            result_text = "<font color='red'>Heart disease detected</font>"
+        elif result == 4:
+            result_text = "<font color='red'>Heart disease detected</font>"
+        self.result_label.setText(result_text)
 
