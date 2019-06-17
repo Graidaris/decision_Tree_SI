@@ -1,4 +1,5 @@
 __pycach__/
+.vs/*
 .vscode/
 venv/
 .venv_windows/
