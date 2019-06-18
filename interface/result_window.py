@@ -94,7 +94,7 @@ class Ui_ResultMenu(object):
         
 #added from me:
 
-    def result_text(self, result):        
+    def result_text(self, result):
         if result == 0:
             result_text = "<font color='green'>Heart disease not detected</font>"
         elif result == 1:
