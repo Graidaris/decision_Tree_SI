@@ -1,4 +1,5 @@
 #/usr/bin/python3
+# -*- coding: utf-8 -*-
 
 AGE = 0
 SEX = 1
