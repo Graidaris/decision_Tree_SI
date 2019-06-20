@@ -14,12 +14,11 @@ class DecisionTree:
     target_names = ['No presence', 'Presence 1',
                     'Presence 2', 'Presence 3', 'Presence 4']
 
-    def __init__(self):
+    def __init__(self, max_depth=None):
         self.dataset = {'data': [], 'target': []}
-        self.tree_classifier = tree.DecisionTreeClassifier()
-        self.tree_regressor = tree.DecisionTreeRegressor()
-
-
+        self.tree_classifier = tree.DecisionTreeClassifier(max_depth=max_depth)
+        self.tree_regressor = tree.DecisionTreeRegressor(max_depth=max_depth)
+    
     def load_dataset(self, name):
         print(f"Load database: {name}")
         list_of_data = []
@@ -34,9 +33,11 @@ class DecisionTree:
         except Exception as e:
             print(f"ERROR with opens file {name} - {e}")
             return None
+        self.load_to_datset(list_of_data)
 
+
+    def load_to_datset(self, list_of_data):
         self.__sort_by_target(list_of_data)
-
         for one_set in list_of_data:
             self.dataset['data'].append(one_set[:-1])
             self.dataset['target'].append(int(one_set[-1]))
@@ -48,7 +49,6 @@ class DecisionTree:
         ds.sort(key=self.__take_target)
 
     def training_classifier(self):
-        print("Training classifier")
         self.tree_classifier = self.tree_classifier.fit(
             self.dataset['data'], self.dataset['target'])
 
@@ -58,19 +58,16 @@ class DecisionTree:
         print(text_tree)
 
     def training_regression(self):
-        print("Training regression")
         targets_for_regression = [float(x) for x in self.dataset['target']]
         self.tree_regressor = self.tree_regressor.fit(
             self.dataset['data'], targets_for_regression)
 
     def predict_by_classification(self, array):
         """ Predict the class, using sklearn library classification.predict """
-        print("Predict by classification")
         return self.tree_classifier.predict(array)
 
     def predict_by_regression(self, array):
         """ Predict the class by regression, using sklearn library regression.predict """
-        print("Predict by regression")
         return self.tree_regressor.predict(array)
 
     def save_tree(self, name_out_file="tree_of_classification"):
