@@ -53,6 +53,28 @@ for i in range(20):
     results_regressor.append(true_per)
     depths.append(i+1)
     
+    
+    
+    
+folder_name = 'pictures'
+name_png = 'predict.png'
+new_name = name_png
+
+if not os.path.exists(folder_name):
+    os.mkdir(folder_name)
+
+count = 0
+while True:
+    path_to_picture = os.path.join(folder_name,new_name)
+    if os.path.exists(path_to_picture):
+        count += 1
+        new_name = name_png.split('.')
+        new_name = str(new_name[0] + str(count) + '.' + new_name[1])
+    else:
+        break
+    
+    
+    
 df = pd.DataFrame(
     {
         'classifier_predict':results_classifier,
@@ -64,4 +86,7 @@ df = pd.DataFrame(
 ax = plt.gca()
 df.plot(kind='line',x='depth_of_tree',y='classifier_predict',ax=ax)
 df.plot(kind='line',x='depth_of_tree',y='regressor_predict', color='red' ,ax=ax)
-plt.savefig('predict.png')
+
+
+
+plt.savefig(path_to_picture)
