@@ -20,7 +20,7 @@ class MainWindow(QMainWindow):
         self.regression = False
         self.ui = None
         self.go_to_main_window()
-        self.d_tree = DecisionTree()
+        self.d_tree = DecisionTree(max_depth=6)
         path_to_dataset = os.path.join('dataset', 'joint_dataset.data')
         self.path_to_questions_json = os.path.join("questions", "questions.json")
         self.d_tree.load_dataset(path_to_dataset)
