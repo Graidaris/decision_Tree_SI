@@ -11,7 +11,12 @@ Used datasets:
 - processed.va.data
 
 
-For install all important modules to run the project:
+For install all important modules to run the project need to execute the command:
 ```
  pip install -r requirement.txt
+```
+
+To start programm need to execute the command:
+```
+ python application.py
 ```
