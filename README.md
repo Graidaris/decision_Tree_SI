@@ -18,12 +18,8 @@ Based on tests, classification predictions work better than regression.
 ![graph](https://github.com/Graidaris/heart_disease_detector/blob/master/pictures/predict.png)
 
 # Getting started
-For install all important modules to run the project need to execute the command:
-```
- pip install -r requirement.txt
-```
-
-To start programm need to execute the command:
-```
- python application.py
-```
+1. Install python 3.7.*
+2. Install all important dependencies:
+   - ```pip install -r requirement.txt```
+3. Start the program:
+   - ``` python3 application.py ```
