@@ -9,7 +9,7 @@ from interface.interview_window import Ui_InterviewWindow
 from interface.result_window import Ui_ResultMenu
 
 from decision_tree import DecisionTree
-
+from saver_results import SaveResult
 
 class MainWindow(QMainWindow):
     def __init__(self):
@@ -61,12 +61,19 @@ class MainWindow(QMainWindow):
     def previous_question(self):
         self.ui.previous_question()
         
+    def save_results(self, data):
+        save_res = SaveResult()
+        save_res.set_path("dataset/new_results.data")
+        save_res.save(data)
+        
     def go_to_result(self):
         data_to_analysis = self.ui.finish_interview()
         if self.classifier:
             result = self.d_tree.predict_by_classification([data_to_analysis])
         elif self.regression:
             result = self.d_tree.predict_by_regression([data_to_analysis])
+            
+        self.save_results(data_to_analysis + result)
             
         self.ui = Ui_ResultMenu()
         self.ui.setupUi(self)
