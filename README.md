@@ -13,7 +13,7 @@ Used datasets:
 - processed.va.data
 
 # Analysis
-Percent of predict is about 56% when the depth of the tree is 6.</br>
+Percent of predict is more than 56% when the depth of the tree is 6.</br>
 ![graph](https://github.com/Graidaris/heart_disease_detector/blob/master/pictures/predict.png)
 
 # Getting started
