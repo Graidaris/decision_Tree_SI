@@ -35,15 +35,11 @@ class MainWindow(QMainWindow):
         self.nr_question = 0
         self.interview_data = []
         self.classifier = False
-        self.regression = False
 
     def check_preferences(self):
         if self.ui.radioButton_classfifier.isChecked():
             self.classifier = True
             self.d_tree.training_classifier()
-        elif self.ui.radioButton_regression.isChecked():
-            self.regression = True
-            self.d_tree.training_regression()
 
         self.go_to_interview()
 
@@ -70,8 +66,6 @@ class MainWindow(QMainWindow):
         data_to_analysis = self.ui.finish_interview()
         if self.classifier:
             result = self.d_tree.predict_by_classification([data_to_analysis])
-        elif self.regression:
-            result = self.d_tree.predict_by_regression([data_to_analysis])
             
         self.save_results(data_to_analysis + result)
             

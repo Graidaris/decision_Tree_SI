@@ -14,7 +14,6 @@ Used datasets:
 
 # Analysis
 Percent of predict is about 56% when the depth of the tree is 6.</br>
-Based on tests, classification predictions work better than regression.
 ![graph](https://github.com/Graidaris/heart_disease_detector/blob/master/pictures/predict.png)
 
 # Getting started

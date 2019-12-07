@@ -49,10 +49,6 @@ class Ui_MainWindow(object):
         self.line.setFrameShadow(QtWidgets.QFrame.Sunken)
         self.line.setObjectName("line")
         self.verticalLayout.addWidget(self.line)
-        self.radioButton_regression = QtWidgets.QRadioButton(self.centralwidget)
-        self.radioButton_regression.setAutoFillBackground(False)
-        self.radioButton_regression.setObjectName("radioButton_regression")
-        self.verticalLayout.addWidget(self.radioButton_regression)
         self.verticalLayout_2.addLayout(self.verticalLayout)
         self.pushButton_start = QtWidgets.QPushButton(self.centralwidget)
         self.pushButton_start.setObjectName("pushButton_start")
@@ -66,6 +62,5 @@ class Ui_MainWindow(object):
         MainWindow.setWindowTitle(QtWidgets.QApplication.translate("MainWindow", "MainWindow", None, -1))
         self.question.setText(QtWidgets.QApplication.translate("MainWindow", "What method do you want to choose?", None, -1))
         self.radioButton_classfifier.setText(QtWidgets.QApplication.translate("MainWindow", "Classifier", None, -1))
-        self.radioButton_regression.setText(QtWidgets.QApplication.translate("MainWindow", "Regression", None, -1))
         self.pushButton_start.setText(QtWidgets.QApplication.translate("MainWindow", "Get started", None, -1))
 
